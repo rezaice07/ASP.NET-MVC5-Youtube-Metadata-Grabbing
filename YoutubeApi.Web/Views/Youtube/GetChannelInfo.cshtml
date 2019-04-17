@@ -1,0 +1,48 @@
+﻿
+@model YoutubeApi.Web.ViewModels.YouTubeViewModel
+
+@{
+    ViewBag.Title = "Your Videos";
+}
+
+<div class="jumbotron">
+    <h1>Youtube - @ViewBag.Title </h1>
+    <p class="lead">Manager your youtube channel metadata informations.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" action="/Youtube/GetChannelInfo">
+            @Html.HiddenFor(m=>m.YoutubeApiKey)
+            <div class="form-group">
+                <label for="email">Your Channel ID:</label>
+                @Html.TextBoxFor(m => m.ChannelId, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m=>m.ChannelId)
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</div>
+
+@if (Model.YouTubeDataList != null && Model.YouTubeDataList.Any())
+{
+    <div class="row">
+        @foreach (var item in Model.YouTubeDataList)
+        {
+            <div class="col-md-12">
+                <h2>@item.Title</h2>
+                <p>
+                    @item.Descriptions
+                </p>
+                <p>
+                    <div style="width:853px;height:480px">
+                        <img src="@item.ImageUrl" />
+                    </div>
+                </p>
+
+                <iframe style="width:120px;height:80px;" width="853" height="480" src="@item.VideoId" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+            </div>
+        }
+    </div>
+}
