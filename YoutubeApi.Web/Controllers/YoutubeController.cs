@@ -22,7 +22,7 @@ namespace YoutubeApi.Web.Controllers
         public ActionResult GetChannelInfo()
         {
             var model = new YouTubeViewModel {
-                YoutubeApiKey= "AIzaSyDRuE0N3IBwU_Ncz2bOkvfjmb3NwS8LGr8"
+                YoutubeApiKey= "YOUR_YOUTUBE_APIKEY"
             };
 
             return View(model);
